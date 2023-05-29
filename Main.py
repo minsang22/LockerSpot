@@ -20,6 +20,7 @@ class LoginWindow(QMainWindow):
         #DB로 아이디, 비밀번호 전송 후 확인 -> 있다면 ApplyWindow로 화면 전환
         #틀렸다면 틀렸다고 창 띄움
         self.loginBtn.setText("사용 중")
+        self.loginBtn.setText("사용 중")
         
 class ApplyWindow(QMainWindow) :
     def __init__(self) :
