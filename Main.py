@@ -18,7 +18,8 @@ class LoginWindow(QMainWindow, login_ui) :
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.loginBtn.clicked.connect(self.Login)
+        #self.loginBtn.clicked.connect(self.Login)
+        self.loginBtn.clicked.connect(self.adminLogin)
         
     def read_studentDB(self):
         with open("StudentDB/StudentID.txt", "r") as file :
@@ -35,6 +36,17 @@ class LoginWindow(QMainWindow, login_ui) :
         if userid == labelid and userpassword == labelpassword :
             loginwindow.hide()
             applywindow.show()
+        else : 
+            self.loginBtn.setText("등록되지 않은 계정")
+            # check-point : setText가 아닌 새 윈도우를 띄워주는 형식으로 수정
+            
+    def adminLogin(self):
+        labelid = self.id_edit.text()
+        labelpassword = self.pw_edit.text()
+        userid, userpassword = self.read_studentDB()
+        if userid == labelid and userpassword == labelpassword :
+            loginwindow.hide()
+            adminwindow.show()
         else : 
             self.loginBtn.setText("등록되지 않은 계정")
             # check-point : setText가 아닌 새 윈도우를 띄워주는 형식으로 수정
