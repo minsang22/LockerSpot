@@ -213,24 +213,34 @@ class ApplyWindow(QMainWindow, apply_ui) :
             
         if self.selectlocker == "1" :
             returnwindow.locker_label.setText("대여중인 사물함 : A-1 ")
+            returnwindow.lockernum = "1"
         elif self.selectlocker == "2" :
             returnwindow.locker_label.setText("대여중인 사물함 : A-2 ")
+            returnwindow.lockernum = "2"
         elif self.selectlocker == "3" :
             returnwindow.locker_label.setText("대여중인 사물함 : A-3 ")
+            returnwindow.lockernum = "3"
         elif self.selectlocker == "4" :
             returnwindow.locker_label.setText("대여중인 사물함 : A-4 ")
+            returnwindow.lockernum = "4"
         elif self.selectlocker == "5" :
             returnwindow.locker_label.setText("대여중인 사물함 : A-5 ")
+            returnwindow.lockernum = "5"
         elif self.selectlocker == "6" :
             returnwindow.locker_label.setText("대여중인 사물함 : B-1 ")
+            returnwindow.lockernum = "6"
         elif self.selectlocker == "7" :
             returnwindow.locker_label.setText("대여중인 사물함 : B-2 ")
+            returnwindow.lockernum = "7"
         elif self.selectlocker == "8" :
             returnwindow.locker_label.setText("대여중인 사물함 : B-3 ")
+            returnwindow.lockernum = "8"
         elif self.selectlocker == "9" :
             returnwindow.locker_label.setText("대여중인 사물함 : B-4 ")
+            returnwindow.lockernum = "9"
         elif self.selectlocker == "10" :
             returnwindow.locker_label.setText("대여중인 사물함 : B-5 ")
+            returnwindow.lockernum = "10"
         
         applywindow.hide()
         returnwindow.show()
@@ -240,6 +250,9 @@ class ReturnWindow(QMainWindow, return_ui) :
         super().__init__()
         self.setupUi(self)
         self.name_label.setText("학생 이름 : " + self.read_studentname())
+        self.returnBtn.clicked.connect(self.returnlocker)
+        self.lockernum = ""
+        
         
     def read_studentname(self):
         with open("StudentDB/StudentID.txt", "r") as file :
@@ -247,13 +260,30 @@ class ReturnWindow(QMainWindow, return_ui) :
             name = lines[2].strip()
             return name
     
-    
+    def returnlocker(self) :
+        with open("LockerDB/LockerList.txt", "r") as fr :
+            lines = fr.readlines()
+            if self.lockernum == "10" :
+                lines[int(self.lockernum)-1] = "0"
+            else :
+                lines[int(self.lockernum)-1] = "0\n"
+            fr.close()
+            
+        with open("LockerDB/LockerList.txt", "w") as fw :
+            for line in lines :
+                fw.write(line)
+            fw.close()
+        returnwindow.hide()
+        applywindow.show()
+        
+        
+        
     
 class AdminWindow(QMainWindow, admin_ui) :
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-            
+        
                 
             
         
