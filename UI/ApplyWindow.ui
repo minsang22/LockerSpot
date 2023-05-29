@@ -116,7 +116,7 @@
     <string>선택한 사물함 :</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="parkingspace1">
+  <widget class="QPushButton" name="lockerspace1">
    <property name="geometry">
     <rect>
      <x>60</x>
@@ -132,7 +132,7 @@
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="parkingspace2">
+  <widget class="QPushButton" name="lockerspace2">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -148,7 +148,7 @@
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="parkingspace3">
+  <widget class="QPushButton" name="lockerspace3">
    <property name="geometry">
     <rect>
      <x>220</x>
@@ -164,7 +164,7 @@
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="parkingspace4">
+  <widget class="QPushButton" name="lockerspace4">
    <property name="geometry">
     <rect>
      <x>300</x>
@@ -180,7 +180,7 @@
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="parkingspace6">
+  <widget class="QPushButton" name="lockerspace6">
    <property name="geometry">
     <rect>
      <x>60</x>
@@ -196,7 +196,7 @@
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="parkingspace5">
+  <widget class="QPushButton" name="lockerspace5">
    <property name="geometry">
     <rect>
      <x>380</x>
@@ -212,7 +212,7 @@
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="parkingspace7">
+  <widget class="QPushButton" name="lockerspace7">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -228,7 +228,7 @@
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="parkingspace8">
+  <widget class="QPushButton" name="lockerspace8">
    <property name="geometry">
     <rect>
      <x>220</x>
@@ -244,7 +244,7 @@
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="parkingspace9">
+  <widget class="QPushButton" name="lockerspace9">
    <property name="geometry">
     <rect>
      <x>300</x>
@@ -260,7 +260,7 @@
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="parkingspace10">
+  <widget class="QPushButton" name="lockerspace10">
    <property name="geometry">
     <rect>
      <x>380</x>
