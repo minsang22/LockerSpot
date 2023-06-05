@@ -18,8 +18,8 @@ class LoginWindow(QMainWindow, login_ui) :
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        #self.loginBtn.clicked.connect(self.Login)
-        self.loginBtn.clicked.connect(self.adminLogin)
+        self.loginBtn.clicked.connect(self.Login)
+        #self.loginBtn.clicked.connect(self.adminLogin)
         
     def read_studentDB(self):
         with open("StudentDB/StudentID.txt", "r") as file :
