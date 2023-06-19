@@ -267,7 +267,7 @@ class ReturnWindow(QMainWindow, return_ui) :
         self.returnBtn.clicked.connect(self.returnlocker)
         self.sdc = StudentDBController()
         self.lockernum = ""
-        
+        self.usageHistoryBtn.clicked.connect(self.usageHistory)
         
     def read_studentname(self):
         with open("StudentDB/StudentID.txt", "r") as file :
@@ -291,6 +291,9 @@ class ReturnWindow(QMainWindow, return_ui) :
         returnwindow.hide()
         applywindow.show()
         
+    def usageHistory(self):
+        self.usageHistoryList.insertItem(0, "A-1")
+        
         
         
     
@@ -299,6 +302,10 @@ class AdminWindow(QMainWindow, admin_ui) :
         super().__init__()
         self.setupUi(self)
         self.translate_locknum = ""
+        #QComboBox 추가
+        self.student_combo_box.addItem("윤민상")
+        self.student_combo_box.addItem("성정규")
+        self.student_combo_box.addItem("안수현")
         self.sdc = StudentDBController()
         self.ldc = LockerDBController()
         self.adc = AdminDBController()
@@ -338,6 +345,9 @@ class AdminWindow(QMainWindow, admin_ui) :
         self.lockerspace10.clicked.connect(self.lockerspace10btn)
         
         self.returnBtn.clicked.connect(self.returnlocker)
+        self.setStudentToLockerBtn.clicked.connect(self.assignstudent)
+        self.getStudentDBBtn.clicked.connect(self.getStudentDB)
+        self.student_list.itemClicked.connect(self.studentListClicked)
         
     def rebtntext(self):
         with open("LockerDB/LockerList.txt", "r") as file :
@@ -361,8 +371,32 @@ class AdminWindow(QMainWindow, admin_ui) :
             if int(lines[8]) == 0 :
                 self.lockerspace9.setText("B-4")
             if int(lines[9]) == 0 :
-                self.lockerspace10.setText("B-5")    
+                self.lockerspace10.setText("B-5")   
     
+    def rebtntext2(self):
+        with open("LockerDB/LockerList.txt", "r") as file :
+            lines = file.readlines()
+            if int(lines[0]) == 1 :
+                self.lockerspace1.setText("사용중")
+            if int(lines[1]) == 1 :
+                self.lockerspace2.setText("사용중")
+            if int(lines[2]) == 1 :
+                self.lockerspace3.setText("사용중")
+            if int(lines[3]) == 1 :
+                self.lockerspace4.setText("사용중")
+            if int(lines[4]) == 1 :
+                self.lockerspace5.setText("사용중")
+            if int(lines[5]) == 1 :
+                self.lockerspace6.setText("사용중")
+            if int(lines[6]) == 1 :
+                self.lockerspace7.setText("사용중")
+            if int(lines[7]) == 1 :
+                self.lockerspace8.setText("사용중")
+            if int(lines[8]) == 1 :
+                self.lockerspace9.setText("사용중")
+            if int(lines[9]) == 1 :
+                self.lockerspace10.setText("사용중")  
+
     def read_studentname(self):
         with open("StudentDB/StudentID.txt", "r") as file :
             lines = file.readlines()
@@ -392,7 +426,7 @@ class AdminWindow(QMainWindow, admin_ui) :
     def lockerspace3btn(self):
         if self.lockerspace3.text() == "사용중" :
             self.return_locker.setText("선택한 사물함 : A-3")
-            self.return_student.setText("사용중인 학생 : " + self.read_studentname())
+            self.return_student.setText("사용중인 학생 : 안수현")
             self.translate_locknum = "3"
             
         else : 
@@ -484,6 +518,42 @@ class AdminWindow(QMainWindow, admin_ui) :
                 fw.write(line)
             fw.close()
         self.rebtntext()
+        
+    def assignstudent(self):
+        with open("LockerDB/LockerList.txt", "r") as fr :
+            lines = fr.readlines()
+            if self.translate_locknum == "10" :
+                lines[int(self.translate_locknum)-1] = "1"
+            else :
+                lines[int(self.translate_locknum)-1] = "1\n"
+            fr.close()
+            
+        with open("LockerDB/LockerList.txt", "w") as fw :
+            for line in lines :
+                fw.write(line)
+            fw.close()
+        self.rebtntext2()
+        
+    def getStudentDB(self):
+        self.student_list.insertItem(0, "윤민상")
+        self.student_list.insertItem(1, "성정규")
+        self.student_list.insertItem(2, "안수현")
+        
+    def studentListClicked(self):
+        if self.student_list.currentRow() == 0 :
+            self.student_name.setText("이름 : 윤민상")
+            self.check_usage.setText("사용 여부 : 사용중")
+            self.usage_locker.setText("사용중인 사물함 : A-1")
+        
+        elif self.student_list.currentRow() == 1 :
+            self.student_name.setText("이름 : 성정규")
+            self.check_usage.setText("사용 여부 : 사용중")
+            self.usage_locker.setText("사용중인 사물함 : A-2")
+        
+        elif self.student_list.currentRow() == 2 :
+            self.student_name.setText("이름 : 안수현")
+            self.check_usage.setText("사용 여부 : 사용중이 아님")
+            self.usage_locker.setText("사용중인 사물함 : 없음")
                     
         
                 
