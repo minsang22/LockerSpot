@@ -16,7 +16,7 @@ class Ui_Dialog(object):
         Dialog.setObjectName("Dialog")
         Dialog.resize(850, 500)
         self.loginBtn = QtWidgets.QPushButton(Dialog)
-        self.loginBtn.setGeometry(QtCore.QRect(340, 360, 171, 61))
+        self.loginBtn.setGeometry(QtCore.QRect(380, 340, 131, 61))
         font = QtGui.QFont()
         font.setFamily("Nanum Gothic")
         font.setPointSize(18)
@@ -68,6 +68,14 @@ class Ui_Dialog(object):
         font.setPointSize(18)
         self.pw_edit.setFont(font)
         self.pw_edit.setObjectName("pw_edit")
+        self.loginBtn_2 = QtWidgets.QPushButton(Dialog)
+        self.loginBtn_2.setGeometry(QtCore.QRect(540, 340, 141, 61))
+        font = QtGui.QFont()
+        font.setFamily("Nanum Gothic")
+        font.setPointSize(18)
+        self.loginBtn_2.setFont(font)
+        self.loginBtn_2.setAutoDefault(False)
+        self.loginBtn_2.setObjectName("loginBtn_2")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -80,6 +88,7 @@ class Ui_Dialog(object):
         self.title_label_2.setText(_translate("Dialog", "LockerSpot"))
         self.id_label.setText(_translate("Dialog", "ON국민 아이디:"))
         self.pw_label.setText(_translate("Dialog", "비밀번호:"))
+        self.loginBtn_2.setText(_translate("Dialog", "관리자 로그인"))
 
 
 if __name__ == "__main__":
