@@ -16,9 +16,9 @@
   <widget class="QPushButton" name="loginBtn">
    <property name="geometry">
     <rect>
-     <x>380</x>
+     <x>340</x>
      <y>340</y>
-     <width>131</width>
+     <width>171</width>
      <height>61</height>
     </rect>
    </property>
@@ -157,9 +157,9 @@
   <widget class="QPushButton" name="loginBtn_2">
    <property name="geometry">
     <rect>
-     <x>540</x>
+     <x>520</x>
      <y>340</y>
-     <width>141</width>
+     <width>171</width>
      <height>61</height>
     </rect>
    </property>
