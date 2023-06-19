@@ -19,7 +19,7 @@ class LoginWindow(QMainWindow, login_ui) :
         super().__init__()
         self.setupUi(self)
         self.loginBtn.clicked.connect(self.Login)
-        #self.loginBtn.clicked.connect(self.adminLogin)
+        self.loginBtn_2.clicked.connect(self.adminLogin)
         
     def read_studentDB(self):
         with open("StudentDB/StudentID.txt", "r") as file :
@@ -295,6 +295,190 @@ class AdminWindow(QMainWindow, admin_ui) :
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.translate_locknum = ""
+        with open("LockerDB/LockerList.txt", "r") as file :
+            lines = file.readlines()
+            if int(lines[0]) == 1 :
+                self.lockerspace1.setText("사용중")
+            if int(lines[1]) == 1 :
+                self.lockerspace2.setText("사용중")
+            if int(lines[2]) == 1 :
+                self.lockerspace3.setText("사용중")
+            if int(lines[3]) == 1 :
+                self.lockerspace4.setText("사용중")
+            if int(lines[4]) == 1 :
+                self.lockerspace5.setText("사용중")
+            if int(lines[5]) == 1 :
+                self.lockerspace6.setText("사용중")
+            if int(lines[6]) == 1 :
+                self.lockerspace7.setText("사용중")
+            if int(lines[7]) == 1 :
+                self.lockerspace8.setText("사용중")
+            if int(lines[8]) == 1 :
+                self.lockerspace9.setText("사용중")
+            if int(lines[9]) == 1 :
+                self.lockerspace10.setText("사용중")
+            
+        
+        self.lockerspace1.clicked.connect(self.lockerspace1btn)
+        self.lockerspace2.clicked.connect(self.lockerspace2btn)
+        self.lockerspace3.clicked.connect(self.lockerspace3btn)
+        self.lockerspace4.clicked.connect(self.lockerspace4btn)
+        self.lockerspace5.clicked.connect(self.lockerspace5btn)
+        self.lockerspace6.clicked.connect(self.lockerspace6btn)
+        self.lockerspace7.clicked.connect(self.lockerspace7btn)
+        self.lockerspace8.clicked.connect(self.lockerspace8btn)
+        self.lockerspace9.clicked.connect(self.lockerspace9btn)
+        self.lockerspace10.clicked.connect(self.lockerspace10btn)
+        
+        self.returnBtn.clicked.connect(self.returnlocker)
+        
+    def rebtntext(self):
+        with open("LockerDB/LockerList.txt", "r") as file :
+            lines = file.readlines()
+            if int(lines[0]) == 0 :
+                self.lockerspace1.setText("A-1")
+            if int(lines[1]) == 0 :
+                self.lockerspace2.setText("A-2")
+            if int(lines[2]) == 0 :
+                self.lockerspace3.setText("A-3")
+            if int(lines[3]) == 0 :
+                self.lockerspace4.setText("A-4")
+            if int(lines[4]) == 0 :
+                self.lockerspace5.setText("A-5")
+            if int(lines[5]) == 0 :
+                self.lockerspace6.setText("B-1")
+            if int(lines[6]) == 0 :
+                self.lockerspace7.setText("B-2")
+            if int(lines[7]) == 0 :
+                self.lockerspace8.setText("B-3")
+            if int(lines[8]) == 0 :
+                self.lockerspace9.setText("B-4")
+            if int(lines[9]) == 0 :
+                self.lockerspace10.setText("B-5")    
+    
+    def read_studentname(self):
+        with open("StudentDB/StudentID.txt", "r") as file :
+            lines = file.readlines()
+            name = lines[2].strip()
+            return name
+    
+    def lockerspace1btn(self):
+        if self.lockerspace1.text() == "사용중" :
+            self.return_locker.setText("선택한 사물함 : A-1")
+            self.return_student.setText("사용중인 학생 : " + self.read_studentname())
+            self.translate_locknum = "1"
+            
+        else : 
+            self.assign_locker.setText("선택한 사물함 : A-1")
+            self.translate_locknum = "1"
+            
+    def lockerspace2btn(self):
+        if self.lockerspace2.text() == "사용중" :
+            self.return_locker.setText("선택한 사물함 : A-2")
+            self.return_student.setText("사용중인 학생 : " + self.read_studentname())
+            self.translate_locknum = "2"
+            
+        else : 
+            self.assign_locker.setText("선택한 사물함 : A-2")
+            self.translate_locknum = "2"
+            
+    def lockerspace3btn(self):
+        if self.lockerspace3.text() == "사용중" :
+            self.return_locker.setText("선택한 사물함 : A-3")
+            self.return_student.setText("사용중인 학생 : " + self.read_studentname())
+            self.translate_locknum = "3"
+            
+        else : 
+            self.assign_locker.setText("선택한 사물함 : A-3")
+            self.translate_locknum = "3"
+            
+    def lockerspace4btn(self):
+        if self.lockerspace4.text() == "사용중" :
+            self.return_locker.setText("선택한 사물함 : A-4")
+            self.return_student.setText("사용중인 학생 : " + self.read_studentname())
+            self.translate_locknum = "4"
+            
+        else : 
+            self.assign_locker.setText("선택한 사물함 : A-4")
+            self.translate_locknum = "4"
+            
+    def lockerspace5btn(self):
+        if self.lockerspace5.text() == "사용중" :
+            self.return_locker.setText("선택한 사물함 : A-5")
+            self.return_student.setText("사용중인 학생 : " + self.read_studentname())
+            self.translate_locknum = "5"
+            
+        else : 
+            self.assign_locker.setText("선택한 사물함 : A-5")
+            self.translate_locknum = "5"
+            
+    def lockerspace6btn(self):
+        if self.lockerspace6.text() == "사용중" :
+            self.return_locker.setText("선택한 사물함 : B-1")
+            self.return_student.setText("사용중인 학생 : " + self.read_studentname())
+            self.translate_locknum = "6"
+            
+        else : 
+            self.assign_locker.setText("선택한 사물함 : B-1")
+            self.translate_locknum = "6"
+    
+    def lockerspace7btn(self):
+        if self.lockerspace7.text() == "사용중" :
+            self.return_locker.setText("선택한 사물함 : B-2")
+            self.return_student.setText("사용중인 학생 : " + self.read_studentname())
+            self.translate_locknum = "7"
+            
+        else : 
+            self.assign_locker.setText("선택한 사물함 : B-2")
+            self.translate_locknum = "7"
+    
+    def lockerspace8btn(self):
+        if self.lockerspace8.text() == "사용중" :
+            self.return_locker.setText("선택한 사물함 : B-3")
+            self.return_student.setText("사용중인 학생 : " + self.read_studentname())
+            self.translate_locknum = "8"
+            
+        else : 
+            self.assign_locker.setText("선택한 사물함 : B-3")
+            self.translate_locknum = "8"
+            
+    def lockerspace9btn(self):
+        if self.lockerspace9.text() == "사용중" :
+            self.return_locker.setText("선택한 사물함 : B-4")
+            self.return_student.setText("사용중인 학생 : " + self.read_studentname())
+            self.translate_locknum = "9"
+            
+        else : 
+            self.assign_locker.setText("선택한 사물함 : B-4")
+            self.translate_locknum = "9"
+            
+    def lockerspace10btn(self):
+        if self.lockerspace10.text() == "사용중" :
+            self.return_locker.setText("선택한 사물함 : B-5")
+            self.return_student.setText("사용중인 학생 : " + self.read_studentname())
+            self.translate_locknum = "10"
+            
+        else : 
+            self.assign_locker.setText("선택한 사물함 : B-5")
+            self.translate_locknum = "10"
+            
+    
+    def returnlocker(self):
+        with open("LockerDB/LockerList.txt", "r") as fr :
+            lines = fr.readlines()
+            if self.translate_locknum == "10" :
+                lines[int(self.translate_locknum)-1] = "0"
+            else :
+                lines[int(self.translate_locknum)-1] = "0\n"
+            fr.close()
+            
+        with open("LockerDB/LockerList.txt", "w") as fw :
+            for line in lines :
+                fw.write(line)
+            fw.close()
+        self.rebtntext()
+                    
         
                 
             
