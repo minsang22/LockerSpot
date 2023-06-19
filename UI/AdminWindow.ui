@@ -35,64 +35,6 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QListWidget" name="usable_locker_list">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>170</y>
-     <width>256</width>
-     <height>251</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QListWidget" name="unusable_locker_list">
-   <property name="geometry">
-    <rect>
-     <x>360</x>
-     <y>170</y>
-     <width>256</width>
-     <height>251</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="usage_title">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>150</y>
-     <width>81</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Nanum Gothic</family>
-     <pointsize>14</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>사용 가능</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="usage_title_2">
-   <property name="geometry">
-    <rect>
-     <x>360</x>
-     <y>150</y>
-     <width>81</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Nanum Gothic</family>
-     <pointsize>14</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>사용 중</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="locker_list_title">
    <property name="geometry">
     <rect>
@@ -110,28 +52,6 @@
    </property>
    <property name="text">
     <string>사물함 목록 확인</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="getLockerDBBtn">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>90</y>
-     <width>161</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Nanum Gothic</family>
-     <pointsize>18</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>확인하기</string>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
    </property>
   </widget>
   <widget class="QLabel" name="assign_title">
@@ -417,6 +337,166 @@
    </property>
    <property name="text">
     <string>사용중인 사물함 : </string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="lockerspace1">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>140</y>
+     <width>81</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>A-1</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="lockerspace2">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>140</y>
+     <width>81</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>A-2</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="lockerspace3">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>140</y>
+     <width>81</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>A-3</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="lockerspace4">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>140</y>
+     <width>81</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>A-4</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="lockerspace5">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>140</y>
+     <width>81</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>A-5</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="lockerspace6">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>270</y>
+     <width>81</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>B-1</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="lockerspace7">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>270</y>
+     <width>81</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>B-2</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="lockerspace8">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>270</y>
+     <width>81</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>B-3</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="lockerspace9">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>270</y>
+     <width>81</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>B-4</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="lockerspace10">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>270</y>
+     <width>81</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>B-5</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
    </property>
   </widget>
  </widget>

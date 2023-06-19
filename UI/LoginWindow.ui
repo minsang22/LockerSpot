@@ -16,9 +16,9 @@
   <widget class="QPushButton" name="loginBtn">
    <property name="geometry">
     <rect>
-     <x>340</x>
-     <y>360</y>
-     <width>171</width>
+     <x>380</x>
+     <y>340</y>
+     <width>131</width>
      <height>61</height>
     </rect>
    </property>
@@ -152,6 +152,28 @@
     <font>
      <pointsize>18</pointsize>
     </font>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="loginBtn_2">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>340</y>
+     <width>141</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Nanum Gothic</family>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>관리자 로그인</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
    </property>
   </widget>
  </widget>
