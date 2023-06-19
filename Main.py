@@ -6,8 +6,9 @@ from PyQt5.uic import loadUi
 from PyQt5 import uic
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-# from LockerDB.LockerDBController import LoackerDBController
-#from Manager.ManagerController import ManagerController
+from LockerDB.LockerDBController import LockerDBController
+from StudentDB.StudentDBController import StudentDBController
+from AdminDB.AdminDBController import AdminDBController
 
 login_ui = uic.loadUiType("UI/LoginWindow.ui")[0]
 apply_ui = uic.loadUiType("UI/ApplyWindow.ui")[0]
@@ -56,6 +57,7 @@ class ApplyWindow(QMainWindow, apply_ui) :
         super().__init__()
         self.setupUi(self)
         self.selectlocker = ""
+        self.sdc = StudentDBController()
         with open("LockerDB/LockerList.txt", "r") as file :
             lines = file.readlines()
             if int(lines[0]) == 1 :
@@ -263,6 +265,7 @@ class ReturnWindow(QMainWindow, return_ui) :
         self.setupUi(self)
         self.name_label.setText("학생 이름 : " + self.read_studentname())
         self.returnBtn.clicked.connect(self.returnlocker)
+        self.sdc = StudentDBController()
         self.lockernum = ""
         
         
@@ -296,6 +299,9 @@ class AdminWindow(QMainWindow, admin_ui) :
         super().__init__()
         self.setupUi(self)
         self.translate_locknum = ""
+        self.sdc = StudentDBController()
+        self.ldc = LockerDBController()
+        self.adc = AdminDBController()
         with open("LockerDB/LockerList.txt", "r") as file :
             lines = file.readlines()
             if int(lines[0]) == 1 :
