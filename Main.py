@@ -26,23 +26,6 @@ class LoginWindow(QMainWindow, login_ui) :
         self.registerBtn.clicked.connect(self.Register)
         self.loginBtn.clicked.connect(self.Login)
         self.loginBtn_2.clicked.connect(self.adminLogin)
-        
-    def read_studentDB(self):
-        with open("StudentDB/StudentID.txt", "r") as file :
-            lines = file.readlines()
-            id = lines[0].strip()
-            password = lines[1].strip()
-            name = lines[2].strip()
-            return id, password
-        
-        server_addr = "http://10.223.113.129:8000"
-        data = {"name" : "코리안섹스머신성정규", "student_id" : "201911113213121",
-                "password" : "12",  "path": "/student/signin"}
-        res = requests.post(server_addr,json = data,
-                            headers={"accept" : "application/json",
-                                     "Content-Type" : "application/json",})
-        return res.json()["status"]
-    
     
     def Register(self):
         loginwindow.hide()
@@ -61,7 +44,7 @@ class LoginWindow(QMainWindow, login_ui) :
         else : 
             self.loginBtn.setText("등록되지 않은 계정")
             # check-point : setText가 아닌 새 윈도우를 띄워주는 형식으로 수정
-            
+
     def adminLogin(self):
         labelid = self.id_edit.text()
         labelpassword = self.pw_edit.text()
@@ -102,28 +85,31 @@ class ApplyWindow(QMainWindow, apply_ui) :
         self.setupUi(self)
         self.selectlocker = ""
         self.sdc = StudentDBController()
-        with open("LockerDB/LockerList.txt", "r") as file :
-            lines = file.readlines()
-            if int(lines[0]) == 1 :
-                self.lockerspace1.setText("사용중")
-            if int(lines[1]) == 1 :
-                self.lockerspace2.setText("사용중")
-            if int(lines[2]) == 1 :
-                self.lockerspace3.setText("사용중")
-            if int(lines[3]) == 1 :
-                self.lockerspace4.setText("사용중")
-            if int(lines[4]) == 1 :
-                self.lockerspace5.setText("사용중")
-            if int(lines[5]) == 1 :
-                self.lockerspace6.setText("사용중")
-            if int(lines[6]) == 1 :
-                self.lockerspace7.setText("사용중")
-            if int(lines[7]) == 1 :
-                self.lockerspace8.setText("사용중")
-            if int(lines[8]) == 1 :
-                self.lockerspace9.setText("사용중")
-            if int(lines[9]) == 1 :
-                self.lockerspace10.setText("사용중")
+        server_addr = "http://10.223.113.129:8000"
+        data = {"path": "/locker/return_locker"}
+        res = requests.post(server_addr, json=data,
+                            headers={"accept": "application/json",
+                                     "Content-Type": "application/json"})
+        if res.json()["A-1"]:
+            self.lockerspace1.setText("사용중")
+        if res.json()["A-2"]:
+            self.lockerspace2.setText("사용중")
+        if res.json()["A-3"]:
+            self.lockerspace3.setText("사용중")
+        if res.json()["A-4"]:
+            self.lockerspace4.setText("사용중")
+        if res.json()["A-5"]:
+            self.lockerspace5.setText("사용중")
+        if res.json()["B-1"]:
+            self.lockerspace6.setText("사용중")
+        if res.json()["B-2"]:
+            self.lockerspace7.setText("사용중")
+        if res.json()["B-3"]:
+            self.lockerspace8.setText("사용중")
+        if res.json()["B-4"]:
+            self.lockerspace9.setText("사용중")
+        if res.json()["B-5"]:
+            self.lockerspace10.setText("사용중")
             
         
         self.lockerspace1.clicked.connect(self.lockerspace1btn)
@@ -138,165 +124,194 @@ class ApplyWindow(QMainWindow, apply_ui) :
         self.lockerspace10.clicked.connect(self.lockerspace10btn)
         
         self.applyBtn.clicked.connect(self.apply)
-        
-    def read_studentname(self):
-        with open("StudentDB/StudentID.txt", "r") as file :
-            lines = file.readlines()
-            name = lines[2].strip()
-            return name
-    
+
     def lockerspace1btn(self):
         if self.lockerspace1.text() == "사용중" :
-            self.name_label.setText("학생 이름 : " + self.read_studentname())
+            self.name_label.setText("학생 이름 : 성정규")
             self.locker_label.setText("선택한 사물함 : 사용중인 사물함")
             
         else : 
-            self.name_label.setText("학생 이름 : " + self.read_studentname())
+            self.name_label.setText("학생 이름 : 성정규")
             lockernum = self.lockerspace1.text()
             self.locker_label.setText("선택한 사물함 : " + lockernum)
             self.selectlocker = "1"
             
     def lockerspace2btn(self):
         if self.lockerspace2.text() == "사용중" :
-            self.name_label.setText("학생 이름 : " + self.read_studentname())
+            self.name_label.setText("학생 이름 : 성정규")
             self.locker_label.setText("선택한 사물함 : 사용중인 사물함")
             
         else : 
-            self.name_label.setText("학생 이름 : " + self.read_studentname())
+            self.name_label.setText("학생 이름 : 성정규")
             lockernum = self.lockerspace2.text()
             self.locker_label.setText("선택한 사물함 : " + lockernum)
             self.selectlocker = "2"
             
     def lockerspace3btn(self):
         if self.lockerspace3.text() == "사용중" :
-            self.name_label.setText("학생 이름 : " + self.read_studentname())
+            self.name_label.setText("학생 이름 : 성정규")
             self.locker_label.setText("선택한 사물함 : 사용중인 사물함")
             
         else : 
-            self.name_label.setText("학생 이름 : " + self.read_studentname())
+            self.name_label.setText("학생 이름 : 성정규")
             lockernum = self.lockerspace3.text()
             self.locker_label.setText("선택한 사물함 : " + lockernum)
             self.selectlocker = "3"
             
     def lockerspace4btn(self):
         if self.lockerspace4.text() == "사용중" :
-            self.name_label.setText("학생 이름 : " + self.read_studentname())
+            self.name_label.setText("학생 이름 : 성정규")
             self.locker_label.setText("선택한 사물함 : 사용중인 사물함")
             
         else : 
-            self.name_label.setText("학생 이름 : " + self.read_studentname())
+            self.name_label.setText("학생 이름 : 성정규")
             lockernum = self.lockerspace4.text()
             self.locker_label.setText("선택한 사물함 : " + lockernum)
             self.selectlocker = "4"
             
     def lockerspace5btn(self):
         if self.lockerspace5.text() == "사용중" :
-            self.name_label.setText("학생 이름 : " + self.read_studentname())
+            self.name_label.setText("학생 이름 : 성정규")
             self.locker_label.setText("선택한 사물함 : 사용중인 사물함")
             
         else : 
-            self.name_label.setText("학생 이름 : " + self.read_studentname())
+            self.name_label.setText("학생 이름 : 성정규")
             lockernum = self.lockerspace5.text()
             self.locker_label.setText("선택한 사물함 : " + lockernum)
             self.selectlocker = "5"
             
     def lockerspace6btn(self):
         if self.lockerspace6.text() == "사용중" :
-            self.name_label.setText("학생 이름 : " + self.read_studentname())
+            self.name_label.setText("학생 이름 : 성정규")
             self.locker_label.setText("선택한 사물함 : 사용중인 사물함")
             
         else : 
-            self.name_label.setText("학생 이름 : " + self.read_studentname())
+            self.name_label.setText("학생 이름 : 성정규")
             lockernum = self.lockerspace6.text()
             self.locker_label.setText("선택한 사물함 : " + lockernum)
             self.selectlocker = "6"
             
     def lockerspace7btn(self):
         if self.lockerspace7.text() == "사용중" :
-            self.name_label.setText("학생 이름 : " + self.read_studentname())
+            self.name_label.setText("학생 이름 : 성정규")
             self.locker_label.setText("선택한 사물함 : 사용중인 사물함")
             
         else : 
-            self.name_label.setText("학생 이름 : " + self.read_studentname())
+            self.name_label.setText("학생 이름 : 성정규")
             lockernum = self.lockerspace7.text()
             self.locker_label.setText("선택한 사물함 : " + lockernum)
             self.selectlocker = "7"
             
     def lockerspace8btn(self):
         if self.lockerspace8.text() == "사용중" :
-            self.name_label.setText("학생 이름 : " + self.read_studentname())
+            self.name_label.setText("학생 이름 : 성정규")
             self.locker_label.setText("선택한 사물함 : 사용중인 사물함")
             
         else : 
-            self.name_label.setText("학생 이름 : " + self.read_studentname())
+            self.name_label.setText("학생 이름 : 성정규")
             lockernum = self.lockerspace8.text()
             self.locker_label.setText("선택한 사물함 : " + lockernum)
             self.selectlocker = "8"
             
     def lockerspace9btn(self):
         if self.lockerspace9.text() == "사용중" :
-            self.name_label.setText("학생 이름 : " + self.read_studentname())
+            self.name_label.setText("학생 이름 : 성정규")
             self.locker_label.setText("선택한 사물함 : 사용중인 사물함")
             
         else : 
-            self.name_label.setText("학생 이름 : " + self.read_studentname())
+            self.name_label.setText("학생 이름 : 성정규")
             lockernum = self.lockerspace9.text()
             self.locker_label.setText("선택한 사물함 : " + lockernum)
             self.selectlocker = "9"
             
     def lockerspace10btn(self):
         if self.lockerspace10.text() == "사용중" :
-            self.name_label.setText("학생 이름 : " + self.read_studentname())
+            self.name_label.setText("학생 이름 : 성정규")
             self.locker_label.setText("선택한 사물함 : 사용중인 사물함")
             
         else : 
-            self.name_label.setText("학생 이름 : " + self.read_studentname())
+            self.name_label.setText("학생 이름 : 성정규")
             lockernum = self.lockerspace10.text()
             self.locker_label.setText("선택한 사물함 : " + lockernum)
             self.selectlocker = "10"
             
     def apply(self):
-        with open("LockerDB/LockerList.txt", "r") as fr :
-            lines = fr.readlines()
-            if self.selectlocker == "10" :
-                lines[int(self.selectlocker)-1] = "1"
-            else :
-                lines[int(self.selectlocker)-1] = "1\n"
-            fr.close()
-            
-        with open("LockerDB/LockerList.txt", "w") as fw :
-            for line in lines :
-                fw.write(line)
-            fw.close()
-            
         if self.selectlocker == "1" :
+            server_addr = "http://10.223.113.129:8000"
+            data = {"locker_id" : "A-1", "path": "/locker/apply"}
+            requests.post(server_addr, json=data,headers={"accept": "application/json","Content-Type": "application/json"})
             returnwindow.locker_label.setText("대여중인 사물함 : A-1 ")
             returnwindow.lockernum = "1"
+
         elif self.selectlocker == "2" :
+            server_addr = "http://10.223.113.129:8000"
+            data = {"locker_id": "A-2", "path": "/locker/apply"}
+            requests.post(server_addr, json=data,
+                          headers={"accept": "application/json", "Content-Type": "application/json"})
             returnwindow.locker_label.setText("대여중인 사물함 : A-2 ")
             returnwindow.lockernum = "2"
+
         elif self.selectlocker == "3" :
+            server_addr = "http://10.223.113.129:8000"
+            data = {"locker_id": "A-3", "path": "/locker/apply"}
+            requests.post(server_addr, json=data,
+                          headers={"accept": "application/json", "Content-Type": "application/json"})
             returnwindow.locker_label.setText("대여중인 사물함 : A-3 ")
             returnwindow.lockernum = "3"
+
         elif self.selectlocker == "4" :
+            server_addr = "http://10.223.113.129:8000"
+            data = {"locker_id": "A-4", "path": "/locker/apply"}
+            requests.post(server_addr, json=data,
+                          headers={"accept": "application/json", "Content-Type": "application/json"})
             returnwindow.locker_label.setText("대여중인 사물함 : A-4 ")
             returnwindow.lockernum = "4"
+
         elif self.selectlocker == "5" :
+            server_addr = "http://10.223.113.129:8000"
+            data = {"locker_id": "A-5", "path": "/locker/apply"}
+            requests.post(server_addr, json=data,
+                          headers={"accept": "application/json", "Content-Type": "application/json"})
             returnwindow.locker_label.setText("대여중인 사물함 : A-5 ")
             returnwindow.lockernum = "5"
+
         elif self.selectlocker == "6" :
+            server_addr = "http://10.223.113.129:8000"
+            data = {"locker_id": "B-1", "path": "/locker/apply"}
+            requests.post(server_addr, json=data,
+                          headers={"accept": "application/json", "Content-Type": "application/json"})
             returnwindow.locker_label.setText("대여중인 사물함 : B-1 ")
             returnwindow.lockernum = "6"
+
         elif self.selectlocker == "7" :
+            server_addr = "http://10.223.113.129:8000"
+            data = {"locker_id": "B-2", "path": "/locker/apply"}
+            requests.post(server_addr, json=data,
+                          headers={"accept": "application/json", "Content-Type": "application/json"})
             returnwindow.locker_label.setText("대여중인 사물함 : B-2 ")
             returnwindow.lockernum = "7"
+
         elif self.selectlocker == "8" :
+            server_addr = "http://10.223.113.129:8000"
+            data = {"locker_id": "B-3", "path": "/locker/apply"}
+            requests.post(server_addr, json=data,
+                          headers={"accept": "application/json", "Content-Type": "application/json"})
             returnwindow.locker_label.setText("대여중인 사물함 : B-3 ")
             returnwindow.lockernum = "8"
+
         elif self.selectlocker == "9" :
+            server_addr = "http://10.223.113.129:8000"
+            data = {"locker_id": "B-4", "path": "/locker/apply"}
+            requests.post(server_addr, json=data,
+                          headers={"accept": "application/json", "Content-Type": "application/json"})
             returnwindow.locker_label.setText("대여중인 사물함 : B-4 ")
             returnwindow.lockernum = "9"
+
         elif self.selectlocker == "10" :
+            server_addr = "http://10.223.113.129:8000"
+            data = {"locker_id": "B-5", "path": "/locker/apply"}
+            requests.post(server_addr, json=data,
+                          headers={"accept": "application/json", "Content-Type": "application/json"})
             returnwindow.locker_label.setText("대여중인 사물함 : B-5 ")
             returnwindow.lockernum = "10"
         
