@@ -250,6 +250,7 @@ class ApplyWindow(QMainWindow, apply_ui) :
             requests.post(server_addr, json=data,headers={"accept": "application/json","Content-Type": "application/json"})
             returnwindow.locker_label.setText("대여중인 사물함 : A-1 ")
             returnwindow.lockernum = "1"
+            returnwindow.locker_id = "A-1"
 
         elif self.selectlocker == "2" :
             server_addr = "http://10.223.113.129:8000"
@@ -258,6 +259,7 @@ class ApplyWindow(QMainWindow, apply_ui) :
                           headers={"accept": "application/json", "Content-Type": "application/json"})
             returnwindow.locker_label.setText("대여중인 사물함 : A-2 ")
             returnwindow.lockernum = "2"
+            returnwindow.locker_id = "A-2"
 
         elif self.selectlocker == "3" :
             server_addr = "http://10.223.113.129:8000"
@@ -266,6 +268,7 @@ class ApplyWindow(QMainWindow, apply_ui) :
                           headers={"accept": "application/json", "Content-Type": "application/json"})
             returnwindow.locker_label.setText("대여중인 사물함 : A-3 ")
             returnwindow.lockernum = "3"
+            returnwindow.locker_id = "A-3"
 
         elif self.selectlocker == "4" :
             server_addr = "http://10.223.113.129:8000"
@@ -274,6 +277,7 @@ class ApplyWindow(QMainWindow, apply_ui) :
                           headers={"accept": "application/json", "Content-Type": "application/json"})
             returnwindow.locker_label.setText("대여중인 사물함 : A-4 ")
             returnwindow.lockernum = "4"
+            returnwindow.locker_id = "A-4"
 
         elif self.selectlocker == "5" :
             server_addr = "http://10.223.113.129:8000"
@@ -282,6 +286,7 @@ class ApplyWindow(QMainWindow, apply_ui) :
                           headers={"accept": "application/json", "Content-Type": "application/json"})
             returnwindow.locker_label.setText("대여중인 사물함 : A-5 ")
             returnwindow.lockernum = "5"
+            returnwindow.locker_id = "A-5"
 
         elif self.selectlocker == "6" :
             server_addr = "http://10.223.113.129:8000"
@@ -290,6 +295,7 @@ class ApplyWindow(QMainWindow, apply_ui) :
                           headers={"accept": "application/json", "Content-Type": "application/json"})
             returnwindow.locker_label.setText("대여중인 사물함 : B-1 ")
             returnwindow.lockernum = "6"
+            returnwindow.locker_id = "B-1"
 
         elif self.selectlocker == "7" :
             server_addr = "http://10.223.113.129:8000"
@@ -298,6 +304,7 @@ class ApplyWindow(QMainWindow, apply_ui) :
                           headers={"accept": "application/json", "Content-Type": "application/json"})
             returnwindow.locker_label.setText("대여중인 사물함 : B-2 ")
             returnwindow.lockernum = "7"
+            returnwindow.locker_id = "B-2"
 
         elif self.selectlocker == "8" :
             server_addr = "http://10.223.113.129:8000"
@@ -306,6 +313,7 @@ class ApplyWindow(QMainWindow, apply_ui) :
                           headers={"accept": "application/json", "Content-Type": "application/json"})
             returnwindow.locker_label.setText("대여중인 사물함 : B-3 ")
             returnwindow.lockernum = "8"
+            returnwindow.locker_id = "B-3"
 
         elif self.selectlocker == "9" :
             server_addr = "http://10.223.113.129:8000"
@@ -314,6 +322,7 @@ class ApplyWindow(QMainWindow, apply_ui) :
                           headers={"accept": "application/json", "Content-Type": "application/json"})
             returnwindow.locker_label.setText("대여중인 사물함 : B-4 ")
             returnwindow.lockernum = "9"
+            returnwindow.locker_id = "B-4"
 
         elif self.selectlocker == "10" :
             server_addr = "http://10.223.113.129:8000"
@@ -322,42 +331,62 @@ class ApplyWindow(QMainWindow, apply_ui) :
                           headers={"accept": "application/json", "Content-Type": "application/json"})
             returnwindow.locker_label.setText("대여중인 사물함 : B-5 ")
             returnwindow.lockernum = "10"
+            returnwindow.locker_id = "B-5"
         
         applywindow.hide()
         returnwindow.show()
-        
-class ReturnWindow(QMainWindow, return_ui) :
+
+
+class ReturnWindow(QMainWindow, return_ui):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.name_label.setText("학생 이름 : " + self.read_studentname())
+        self.name_label.setText("학생 이름 : 성정규")
         self.returnBtn.clicked.connect(self.returnlocker)
         self.sdc = StudentDBController()
-        self.lockernum = ""
+        # server_addr = "http://10.223.113.129:8000"
+        # data = {"student_id": "20191610",
+        #         "password": "1234", "path": "/student/signin"}
+        # res = requests.post(server_addr, json=data,
+        #                     headers={"accept": "application/json",
+        #                              "Content-Type": "application/json"})
+        # self.lockernum = res.json()["locker_id"]
         self.usageHistoryBtn.clicked.connect(self.usageHistory)
-        
-    def read_studentname(self):
-        with open("StudentDB/StudentID.txt", "r") as file :
-            lines = file.readlines()
-            name = lines[2].strip()
-            return name
-    
-    def returnlocker(self) :
-        with open("LockerDB/LockerList.txt", "r") as fr :
-            lines = fr.readlines()
-            if self.lockernum == "10" :
-                lines[int(self.lockernum)-1] = "0"
-            else :
-                lines[int(self.lockernum)-1] = "0\n"
-            fr.close()
-            
-        with open("LockerDB/LockerList.txt", "w") as fw :
-            for line in lines :
-                fw.write(line)
-            fw.close()
+
+    def returnlocker(self):
+        server_addr = "http://10.223.113.129:8000"
+        data = {"locker_id": self.locker_id, "path": "/locker/return"}
+        requests.post(server_addr, json=data,
+                      headers={"accept": "application/json", "Content-Type": "application/json"})
         returnwindow.hide()
+        server_addr = "http://10.223.113.129:8000"
+        data = {"path": "/locker/return_locker"}
+        res = requests.post(server_addr, json=data,
+                            headers={"accept": "application/json",
+                                     "Content-Type": "application/json"})
+        if res.json()["A-1"]:
+            applywindow.lockerspace1.setText("사용중")
+        if res.json()["A-2"]:
+            applywindow.lockerspace2.setText("사용중")
+        if res.json()["A-3"]:
+            applywindow.lockerspace3.setText("사용중")
+        if res.json()["A-4"]:
+            applywindow.lockerspace4.setText("사용중")
+        if res.json()["A-5"]:
+            applywindow.lockerspace5.setText("사용중")
+        if res.json()["B-1"]:
+            applywindow.lockerspace6.setText("사용중")
+        if res.json()["B-2"]:
+            applywindow.lockerspace7.setText("사용중")
+        if res.json()["B-3"]:
+            applywindow.lockerspace8.setText("사용중")
+        if res.json()["B-4"]:
+            applywindow.lockerspace9.setText("사용중")
+        if res.json()["B-5"]:
+            applywindow.lockerspace10.setText("사용중")
         applywindow.show()
-        
+
+
     def usageHistory(self):
         self.usageHistoryList.insertItem(0, "A-1")
         
