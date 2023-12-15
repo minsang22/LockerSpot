@@ -1,4 +1,5 @@
 import sys
+import requests
 from PyQt5.QtWidgets import *
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QInputDialog, QTableWidgetItem
 from PyQt5 import QtWidgets
@@ -66,12 +67,11 @@ class RegisterWindow(QMainWindow, register_ui) :
         self.sdc = StudentDBController()
 
     def write_studentDB(self):
-        with open("StudentDB/StudentID.txt", "w") as file :
-            file.write(self.sdc.getID() + "\n")
-            file.write(self.sdc.getPassword() + "\n")
-            file.write(self.sdc.getName() + "\n")
-            file.write(self.sdc.getLockernum() + "\n")
-            file.close()
+        server_addr = "http://10.223.113.129:8000"
+        data = {"student_id" : self.sdc.getID(), "password" : self.sdc.getPassword(), "name" : self.sdc.getName(),  "path": "/student/signup"}
+        res = requests.post(server_addr, json = data, headers={
+        "accept": "application/json",
+        "Content-Type": "application/json",})
         
     def register(self):
         self.sdc.setID(self.id_edit.text())
