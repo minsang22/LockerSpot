@@ -11,6 +11,7 @@ from StudentDB.StudentDBController import StudentDBController
 from AdminDB.AdminDBController import AdminDBController
 
 login_ui = uic.loadUiType("UI/LoginWindow.ui")[0]
+register_ui = uic.loadUiType("UI/RegisterWindow.ui")[0]
 apply_ui = uic.loadUiType("UI/ApplyWindow.ui")[0]
 return_ui = uic.loadUiType("UI/ReturnWindow.ui")[0]
 admin_ui = uic.loadUiType("UI/AdminWindow.ui")[0]
@@ -19,6 +20,7 @@ class LoginWindow(QMainWindow, login_ui) :
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.registerBtn.clicked.connect(self.Register)
         self.loginBtn.clicked.connect(self.Login)
         self.loginBtn_2.clicked.connect(self.adminLogin)
         
@@ -29,6 +31,10 @@ class LoginWindow(QMainWindow, login_ui) :
             password = lines[1].strip()
             name = lines[2].strip()
             return id, password
+    
+    def Register(self):
+        loginwindow.hide()
+        registerwindow.show()
         
     def Login(self):
         labelid = self.id_edit.text()
@@ -51,7 +57,31 @@ class LoginWindow(QMainWindow, login_ui) :
         else : 
             self.loginBtn.setText("등록되지 않은 계정")
             # check-point : setText가 아닌 새 윈도우를 띄워주는 형식으로 수정
+
+class RegisterWindow(QMainWindow, register_ui) :
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.registerBtn.clicked.connect(self.register)
+        self.sdc = StudentDBController()
+
+    def write_studentDB(self):
+        with open("StudentDB/StudentID.txt", "w") as file :
+            file.write(self.sdc.getID() + "\n")
+            file.write(self.sdc.getPassword() + "\n")
+            file.write(self.sdc.getName() + "\n")
+            file.write(self.sdc.getLockernum() + "\n")
+            file.close()
         
+    def register(self):
+        self.sdc.setID(self.id_edit.text())
+        self.sdc.setPassword(self.pw_edit.text())
+        self.sdc.setName(self.name_edit.text())
+        self.sdc.isApply()
+        self.sdc.setLockernum("")
+        self.write_studentDB()
+        registerwindow.hide()
+        loginwindow.show()        
 class ApplyWindow(QMainWindow, apply_ui) :
     def __init__(self):
         super().__init__()
@@ -563,6 +593,7 @@ class AdminWindow(QMainWindow, admin_ui) :
 if __name__ == '__main__' :
     app = QApplication(sys.argv)
     loginwindow = LoginWindow()
+    registerwindow = RegisterWindow()
     applywindow = ApplyWindow()
     returnwindow = ReturnWindow()
     adminwindow = AdminWindow()
