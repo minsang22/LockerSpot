@@ -344,13 +344,6 @@ class ReturnWindow(QMainWindow, return_ui):
         self.name_label.setText("학생 이름 : 성정규")
         self.returnBtn.clicked.connect(self.returnlocker)
         self.sdc = StudentDBController()
-        # server_addr = "http://10.223.113.129:8000"
-        # data = {"student_id": "20191610",
-        #         "password": "1234", "path": "/student/signin"}
-        # res = requests.post(server_addr, json=data,
-        #                     headers={"accept": "application/json",
-        #                              "Content-Type": "application/json"})
-        # self.lockernum = res.json()["locker_id"]
         self.usageHistoryBtn.clicked.connect(self.usageHistory)
 
     def returnlocker(self):
