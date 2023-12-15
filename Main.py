@@ -1,5 +1,7 @@
 import sys
 import requests
+import json
+import requests
 from PyQt5.QtWidgets import *
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QInputDialog, QTableWidgetItem
 from PyQt5 import QtWidgets
@@ -32,16 +34,28 @@ class LoginWindow(QMainWindow, login_ui) :
             password = lines[1].strip()
             name = lines[2].strip()
             return id, password
+        
+        server_addr = "http://10.223.113.129:8000"
+        data = {"name" : "코리안섹스머신성정규", "student_id" : "201911113213121",
+                "password" : "12",  "path": "/student/signin"}
+        res = requests.post(server_addr,json = data,
+                            headers={"accept" : "application/json",
+                                     "Content-Type" : "application/json",})
+        return res.json()["status"]
+    
     
     def Register(self):
         loginwindow.hide()
         registerwindow.show()
         
     def Login(self):
-        labelid = self.id_edit.text()
-        labelpassword = self.pw_edit.text()
-        userid, userpassword = self.read_studentDB()
-        if userid == labelid and userpassword == labelpassword :
+        server_addr = "http://10.223.113.129:8000"
+        data = {"student_id" : self.id_edit.text(),
+                "password" : self.pw_edit.text(),  "path": "/student/signin"}
+        res = requests.post(server_addr,json = data,
+                            headers={"accept": "application/json",
+                                     "Content-Type": "application/json"})
+        if res.json()["status"] :
             loginwindow.hide()
             applywindow.show()
         else : 
