@@ -11,8 +11,8 @@ class LockerDBController(LockerDB):
     def deleteStudent(self, studentName = ''):
         self.lockerDB.setLockernum(studentName)
 
-    def isUsing():
+    def isUsing(self, using = False):
         if self.lockerDB.studentName == "":
-            return False
+            return using
         else:
             return True

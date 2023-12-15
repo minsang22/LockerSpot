@@ -41,6 +41,7 @@ class LoginWindow(QMainWindow, login_ui) :
         if res.json()["status"] :
             if res.json()["isApply"]:
                 loginwindow.hide()
+                returnwindow.locker_label.setText("대여중인 사물함 : " + res.json()["locker_id"])
                 returnwindow.show()
             else: 
                 loginwindow.hide()
