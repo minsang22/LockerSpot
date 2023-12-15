@@ -26,7 +26,7 @@ class LoginWindow(QMainWindow, login_ui) :
         self.registerBtn.clicked.connect(self.Register)
         self.loginBtn.clicked.connect(self.Login)
         self.loginBtn_2.clicked.connect(self.adminLogin)
-    
+            
     def Register(self):
         loginwindow.hide()
         registerwindow.show()
@@ -39,17 +39,24 @@ class LoginWindow(QMainWindow, login_ui) :
                             headers={"accept": "application/json",
                                      "Content-Type": "application/json"})
         if res.json()["status"] :
-            loginwindow.hide()
-            applywindow.show()
+            if res.json()["isApply"]:
+                loginwindow.hide()
+                returnwindow.show()
+            else: 
+                loginwindow.hide()
+                applywindow.show()
         else : 
             self.loginBtn.setText("등록되지 않은 계정")
             # check-point : setText가 아닌 새 윈도우를 띄워주는 형식으로 수정
 
     def adminLogin(self):
-        labelid = self.id_edit.text()
-        labelpassword = self.pw_edit.text()
-        userid, userpassword = self.read_studentDB()
-        if userid == labelid and userpassword == labelpassword :
+        server_addr = "http://10.223.113.129:8000"
+        data = {"student_id" : self.id_edit.text(),
+                "password" : self.pw_edit.text(),  "path": "/admin/signin"}
+        res = requests.post(server_addr,json = data,
+                            headers={"accept": "application/json",
+                                     "Content-Type": "application/json"})
+        if res.json()["status"] :
             loginwindow.hide()
             adminwindow.show()
         else : 
