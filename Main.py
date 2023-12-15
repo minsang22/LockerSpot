@@ -392,9 +392,14 @@ class AdminWindow(QMainWindow, admin_ui) :
         self.setupUi(self)
         self.translate_locknum = ""
         #QComboBox 추가
-        self.student_combo_box.addItem("윤민상")
-        self.student_combo_box.addItem("성정규")
-        self.student_combo_box.addItem("안수현")
+        server_addr = "http://10.223.113.129:8000"
+        data = {"path": "/admin/student_list"}
+        res = requests.post(server_addr, json=data,
+                      headers={"accept": "application/json", "Content-Type": "application/json"})
+        res = res.json()        
+        self.student_combo_box.addItem(res[0]['name'])
+        self.student_combo_box.addItem(res[1]['name'])
+        self.student_combo_box.addItem(res[2]['name'])
         self.sdc = StudentDBController()
         self.ldc = LockerDBController()
         self.adc = AdminDBController()
@@ -624,23 +629,28 @@ class AdminWindow(QMainWindow, admin_ui) :
         self.rebtntext2()
         
     def getStudentDB(self):
-        self.student_list.insertItem(0, "윤민상")
-        self.student_list.insertItem(1, "성정규")
-        self.student_list.insertItem(2, "안수현")
+        server_addr = "http://10.223.113.129:8000"
+        data = {"path": "/admin/student_list"}
+        res = requests.post(server_addr, json=data,
+                      headers={"accept": "application/json", "Content-Type": "application/json"})
+        res = res.json()        
+        self.student_list.insertItem(0, res[0]['name'])
+        self.student_list.insertItem(1, res[1]['name'])
+        self.student_list.insertItem(2, res[2]['name'])
         
     def studentListClicked(self):
         if self.student_list.currentRow() == 0 :
-            self.student_name.setText("이름 : 윤민상")
+            self.student_name.setText("이름 : 성정규")
             self.check_usage.setText("사용 여부 : 사용중")
             self.usage_locker.setText("사용중인 사물함 : A-1")
         
         elif self.student_list.currentRow() == 1 :
-            self.student_name.setText("이름 : 성정규")
+            self.student_name.setText("이름 : 성창엽")
             self.check_usage.setText("사용 여부 : 사용중")
             self.usage_locker.setText("사용중인 사물함 : A-2")
         
         elif self.student_list.currentRow() == 2 :
-            self.student_name.setText("이름 : 안수현")
+            self.student_name.setText("이름 : 윤민상")
             self.check_usage.setText("사용 여부 : 사용중이 아님")
             self.usage_locker.setText("사용중인 사물함 : 없음")
                     
