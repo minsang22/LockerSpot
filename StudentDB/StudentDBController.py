@@ -11,8 +11,8 @@ class StudentDBController(StudentDB):
     def deleteLockerNum(self, lockernum = ''):
         self.studentDB.setLockernum(lockernum)
 
-    def isApply():
+    def isApply(self, apply = False):
         if self.studentDB.lockernum == '':
-            return False
+            return apply
         else:
             return True
